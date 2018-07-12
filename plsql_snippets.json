@@ -1,0 +1,106 @@
+{
+	// Place your snippets for plsql here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"logger_0 gc_scope_prefix": {
+			 "prefix": "logger_0",
+		 	 "body": [
+		 		"gc_scope_prefix constant varchar2(31) := lower($$plsql_unit) || '.';"
+		 	],
+		 	"description": "Define the logger scope prefix at the top of the package body"
+		},
+	"logger_1.0 l_scope": {
+			 "prefix": "logger_1.0",
+		 	 "body": [
+		 		"l_scope logger_logs.scope%type := gc_scope_prefix || 'todo_proc_name';"
+		 	],
+		 	"description": "Define l_scope before 'begin' after 'as'"
+		},
+	"logger_1.1 l_params": {
+			 "prefix": "logger_1.1",
+		 	 "body": [
+		 		"l_params logger.tab_param;"
+		 	],
+		 	"description": "Define l_params after l_scope"
+		},
+	"logger_2.0 logger.append_param": {
+			 "prefix": "logger_2.0",
+		 	 "body": [
+		 		"logger.append_param(l_params, 'p_param1_todo', p_param1_todo);"
+		 	],
+		 	"description": "Right after begin"
+		},
+	"logger_2.1 logger.log start": {
+			 "prefix": "logger_2.1",
+		 	 "body": [
+		 		"logger.log('START', l_scope, null, l_params);"
+		 	],
+		 	"description": "Right after logger.append_param"
+		},
+	"logger_2.1 logger.log start": {
+			 "prefix": "logger_2.1",
+		 	 "body": [
+		 		"logger.log('START', l_scope, null, l_params);"
+		 	],
+		 	"description": "Right after logger.append_param"
+		},
+	"logger_3.0 logger.log": {
+			 "prefix": "logger_3.0",
+		 	 "body": [
+		 		"logger.log('note', l_scope, null, l_params);"
+		 	],
+		 	"description": "log / debug"
+		},	
+	"logger_3.1 logger.log_error": {
+			 "prefix": "logger_3.1",
+		 	 "body": [
+		 		"logger.log_error('Unhandled Exception', l_scope, null, l_params);"
+		 	],
+		 	"description": "error"
+		},
+	"logger_3.2 logger.log_info": {
+			 "prefix": "logger_3.2",
+		 	 "body": [
+		 		"logger.log_info('FYI', l_scope, null, l_params);"
+		 	],
+		 	"description": "information"
+		},
+	"logger_3.3 logger.log_warn": {
+			 "prefix": "logger_3.3",
+		 	 "body": [
+		 		"logger.log_warn('Watch out!', l_scope, null, l_params);"
+		 	],
+		 	"description": "warn"
+		},
+	"logger_3.4 logger.log_permanent": {
+			 "prefix": "logger_3.4",
+		 	 "body": [
+		 		"logger.log_permanent('important', l_scope, null, l_params);"
+		 	],
+		 	"description": "permanent"
+		},
+	"logger_4.0 logger.log end": {
+			 "prefix": "logger_4.0",
+		 	 "body": [
+		 		"logger.log('END', l_scope);"
+		 	],
+		 	"description": "Right before the exceptions at the end"
+		},
+	"logger_4.1 logger.log exception": {
+			 "prefix": "logger_4.1",
+		 	 "body": [
+		 		"exception when others then logger.log_error('Unhandled Exception', l_scope, null, l_params); raise;"
+		 	],
+		 	"description": "Right before the end"
+		}
+}

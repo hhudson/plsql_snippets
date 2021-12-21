@@ -81,7 +81,7 @@
 	"logger_4.1 logger.log exception": {
 	  "prefix": "logger_4.1",
 	  "body": [
-		"exception when others then logger.log_error('Unhandled Exception', l_scope, null, l_params); raise;"
+		"exception when others then logger.log_error('Unhandled Exception', l_scope, $1, l_params); raise;"
 	  ],
 	  "description": "Right before the end"
 	},
